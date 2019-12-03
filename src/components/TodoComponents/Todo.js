@@ -1,7 +1,7 @@
 import React from "react";
 
 const Todo = props => {
-	console.log("TodoPROPS", props);
+	// console.log("TodoPROPS", props);
 
 	const handleClick = () => {
 		props.toggleCompleted(props.todo.id);

@@ -25,13 +25,29 @@ class App extends React.Component {
 	// you will need a place to store your state in this component.
 	// design `App` to be the parent component of your application.
 	// this component is going to take care of state, and any change handlers you need to work with your state
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			task: task,
 			anotherTask: ""
 		};
+		// console.log("props", props);
 	}
+
+	toggleCompleted = todoId => {
+		this.setState({
+			task: this.state.task.map(todo => {
+				if (todo.id === todoId) {
+					console.log("TOGGLECompleted", todoId);
+					return {
+						...todo,
+						completed: !todo.completed
+					};
+				}
+				return todo;
+			})
+		});
+	};
 
 	clearTask = () => {
 		console.log("CLEARTask");
@@ -62,7 +78,11 @@ class App extends React.Component {
 					<TodoForm addTask={this.addTask} />
 				</div>
 				<div>
-					<TodoList task={this.state.task} />
+					<TodoList
+						task={this.state.task}
+						toggleCompleted={this.toggleCompleted}
+						clearTask={this.clearTask}
+					/>
 				</div>
 			</div>
 		);
